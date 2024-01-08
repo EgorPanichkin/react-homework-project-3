@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import products from '../data/data.json'
 
 const initialState = {
-  catalog: products,
   buyingProducts: []
 }
 
-const productSlice = createSlice({
-  name: 'products',
+const cartSlice = createSlice({
+  name: 'cart',
   initialState,
   reducers: {
     buyProduct(state, action) {
@@ -26,11 +24,12 @@ const productSlice = createSlice({
       }
     },
     refuseProduct(state, action) {
-      state.buyingProducts.forEach((item, index) => {
-        if (item.id == action.payload) {
-          return state.buyingProducts.splice(index, 1)
-        }
-      })
+      // state.buyingProducts.forEach((item, index) => {
+      //   if (item.id == action.payload) {
+      //     return state.buyingProducts.splice(index, 1)
+      //   }
+      // })
+      return { buyingProducts: state.buyingProducts.filter((item) => item.id != action.payload) }
     },
     increaseCountProduct(state, action) {
       state.buyingProducts.find(prod => prod.id == action.payload).count ++
@@ -44,5 +43,5 @@ const productSlice = createSlice({
   }
 })
 
-export const productAcions = productSlice.actions
-export const productReducer = productSlice.reducer
+export const cartAcions = cartSlice.actions
+export const cartReducer = cartSlice.reducer

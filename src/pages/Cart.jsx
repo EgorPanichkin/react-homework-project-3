@@ -1,22 +1,22 @@
 import { Link } from "react-router-dom"
 import { MdOutlineArrowBackIos, MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { productAcions } from "../store/productsReducer";
+import { cartAcions } from "../store/cartSlice";
 import Counter from "../components/Counter";
 
 export default function Cart() {
   const dispatch = useDispatch()
-  const buyProducts = useSelector((state) => state.products.buyingProducts)
+  const buyProducts = useSelector((state) => state.cart.buyingProducts)
 
-  const handleClickRefuse = (e) => {
-    dispatch(productAcions.refuseProduct(e.target.value))
+  const handleClickRefuse = (id) => {
+    dispatch(cartAcions.refuseProduct(id))
   }
 
   const incr = (e) => {
-    dispatch(productAcions.increaseCountProduct(e.target.value))
+    dispatch(cartAcions.increaseCountProduct(e.target.value))
   }
   const decr = (e) => {
-    dispatch(productAcions.decreaseCountProduct(e.target.value))
+    dispatch(cartAcions.decreaseCountProduct(e.target.value))
   }
 
   return (
@@ -34,15 +34,15 @@ export default function Cart() {
       ) : (
         buyProducts.map((prod, index) => {
           return (
-            <div key={`${prod.info._id}${index}`} className="product">
-              <h4>{prod.info.name}</h4>
-              <img src={prod.info.picture} alt="poduct" />
+            <div key={`${prod.id}${index}`} className="product">
+              <h4>{prod.title}</h4>
+              <img src={prod.images[0]} alt="poduct" />
               <div className="buy-container">
-                <p>{prod.info.price}</p>
-                <button onClick={decr} value={prod.info._id}>-</button>
+                <p>{prod.price} &#36;</p>
+                <button onClick={decr} value={prod.id}>-</button>
                 <p>count:{prod.count}</p>
-                <button onClick={incr} value={prod.info._id}>+</button>
-                <button className="buy-button" onClick={handleClickRefuse} value={prod.info._id}><MdDelete size={25}/></button>
+                <button onClick={incr} value={prod.id}>+</button>
+                <button className="buy-button" onClick={() => handleClickRefuse(prod.id)}><MdDelete size={25}/></button>
               </div>
             </div>
           )

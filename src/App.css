@@ -91,3 +91,21 @@ nav {
   text-align: center;
   border-radius: 50%;
 }
+
+.nav_cart {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff00;
+}
+
+.nav_cart div {
+  top: 15px;
+  left: 22px;
+}
+
+.loading {
+  margin: 50px;
+  text-align: center;
+}

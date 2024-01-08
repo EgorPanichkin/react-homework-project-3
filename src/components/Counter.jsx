@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 
 
 export default function Counter() {
-  const buyingProducts = useSelector((state) => state.products.buyingProducts)
+  const buyingProducts = useSelector((state) => state.cart.buyingProducts)
 
   function countProd(buyingProducts) {
     let count = 0
